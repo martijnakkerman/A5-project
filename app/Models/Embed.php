@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Embed extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'youtube_url'
+    ];
 }
