@@ -11,4 +11,9 @@ class Embed extends Model
     protected $fillable = [
         'youtube_url',
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
 }
