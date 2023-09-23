@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('band_id')->nullable()->unsigned()->index();
             $table->foreign('band_id')->references('id')->on('band');
             $table->string('youtube_url');
+        });
     }
 
     /**
