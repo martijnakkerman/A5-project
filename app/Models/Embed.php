@@ -9,6 +9,6 @@ class Embed extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'youtube_url'
+        'youtube_url',
     ];
 }
