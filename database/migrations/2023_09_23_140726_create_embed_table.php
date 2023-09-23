@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bands', function (Blueprint $table) {
+        Schema::create('embed', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->text('biography');
-            $table->string('image_path');
-            $table->string('text_color');
-            $table->string('background_color');
             $table->timestamps();
+            $table->unsignedBigInteger('band_id');
+            $table->foreign('band_id')->references('id')->on('band');
+            $table->string('youtube_url');
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bands');
+        Schema::dropIfExists('embed');
     }
 };
