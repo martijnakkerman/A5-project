@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('embed', function (Blueprint $table) {
+        Schema::create('embeds', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('band_id');
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('embed');
+        Schema::dropIfExists('embeds');
     }
 };
