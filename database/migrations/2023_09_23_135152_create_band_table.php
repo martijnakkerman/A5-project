@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->text('biografy');
+            $table->text('biography');
             $table->string('image_path');
             $table->string('text_color');
             $table->string('background_color');
