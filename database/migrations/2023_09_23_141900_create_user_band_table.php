@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('user_band', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('user_id')->nullable()->unsigned()->index();
-            $table->integer('band_id')->nullable()->unsigned()->index();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('band_id');
             $table->foreign('band_id')->references('id')->on('band');
             $table->foreign('user_id')->references('id')->on('user');
         });

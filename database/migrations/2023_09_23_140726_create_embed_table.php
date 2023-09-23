@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('embed', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('band_id')->nullable()->unsigned()->index();
+            $table->unsignedBigInteger('band_id');
             $table->foreign('band_id')->references('id')->on('band');
             $table->string('youtube_url');
         });
