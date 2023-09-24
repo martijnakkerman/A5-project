@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Band extends Model
 {
     use HasFactory;
+
+    protected $table = 'band';
+
     protected $fillable = [
         'name',
         'description',
