@@ -4,25 +4,33 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 class UserController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function userEdit()
     {
-        return view('user.edit');
+        $user = Auth::user();
+        return view('user.edit', ['user'  => $user]);
+    }
+
+    public function userUpdate(Request $request, User $user){
+
+            $request->validate([
+                'name'=>'required',
+                'email'=>'required|email',
+
+            ]);
+            $user->update($request->all());
+            return redirect('/user/edit')
+                ->with('success', 'User information updated');
+
     }
 }

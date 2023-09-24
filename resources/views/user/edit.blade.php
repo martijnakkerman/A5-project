@@ -8,16 +8,40 @@
                     <div class="card-header">{{ __('Dashboard') }}</div>
 
                     <div class="card-body">
-                        @if (session('status'))
+                        @if (session('success'))
                             <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
+                                {{ session('success') }}
                             </div>
                         @endif
-                        {!! Form::model($user, [ 'route' => [ 'user.update', $user->id ], 'method' => 'patch' ]) !!}
-                        @csrf
 
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div><br>
+                        @endif
 
+                        <form action="{{ route('user.update', $user->id) }}" method="POST">
+                            @method('PATCH')
+                            @csrf
 
+                            <div class="form-group">
+                                <label for="name">name:</label>
+                                <input type="text" class="form-control" name="name"
+                                       value="{{ $user->name }}" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">e-mail:</label>
+                                <input type="text" class="form-control" name="email"
+                                       value="{{ $user->email }}" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Change information</button>
+                            <a class="btn btn-primary" href="{{route('home')}}">Back</a>
+                        </form>
                     </div>
                 </div>
             </div>

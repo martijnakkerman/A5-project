@@ -16,7 +16,7 @@
                         <p>User information:</p>
                         {{ Auth::user()->name }} <br>
                         {{ Auth::user()->email }} <br>
-                        <a href="{{ route('user.edit')}}">Edit user information</a>
+                        <a class="btn btn-primary" href="{{ route('user.edit')}}">Edit user information</a>
 
                         <p>Managed bands:</p>
 
