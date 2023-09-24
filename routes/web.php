@@ -15,11 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-
+//Home
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//Dashboard
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
+//User
 Route::get('/user/edit', [App\Http\Controllers\User\UserController::class, 'userEdit'])->name('user.edit');
-
 Route::patch('/user/{user}/update', [App\Http\Controllers\User\UserController::class, 'userUpdate'])->name('user.update');
+
+//Band
+Route::get('/band/{band}/edit', [App\Http\Controllers\User\BandController::class, 'bandEdit'])->name('band.edit');
