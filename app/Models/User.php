@@ -44,4 +44,9 @@ class User extends Authenticatable
         'password' => 'hashed',
         'is_admin' => 'boolean',
     ];
+
+    public function bands()
+    {
+        return $this->belongsToMany('App\Models\Band', 'user_band');
+    }
 }
