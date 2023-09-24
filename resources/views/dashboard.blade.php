@@ -18,15 +18,17 @@
             <br>
 
             <div class="card">
-                <div class="card-header">{{ __('Managed bands') }}</div>
+                <div class="card-header">{{ __('Your Bands') }}</div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
+                            <a href ="{{route('band.create')}}" class="btn btn-primary">Create new band</a>
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <td>Your bands</td>
+                                    <td>Band</td>
                                     <td>Last changed</td>
+                                    <td></td>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -34,7 +36,7 @@
                                          <tr>
                                              <td>{{$band->name}}</td>
                                              <td>{{$band->updated_at}}</td>
-                                             <td><a href="{{route('band.edit')}}">manage</a></td>
+                                             <td><a href="{{route('band.edit',$band->id)}}">manage</a></td>
                                          </tr>
                                      @endforeach
                                 </tbody>
