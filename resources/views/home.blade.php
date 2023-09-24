@@ -13,8 +13,15 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                        <p>User information:</p>
+                        {{ Auth::user()->name }} <br>
+                        {{ Auth::user()->email }} <br>
+                        <button>Edit user information</button> <br> <br>
 
-                    {{ __('You are logged in!') }}
+                        <p>Managed bands:</p>
+
+
+
                 </div>
             </div>
         </div>
