@@ -29,4 +29,7 @@ class Band extends Model
     {
         return $this->belongsToMany('App\Models\User', 'user_band');
     }
+    public function embeds() {
+        return $this->hasMany('App\Models\Embed', 'band_id');
+    }
 }
