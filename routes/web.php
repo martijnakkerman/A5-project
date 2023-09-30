@@ -26,5 +26,4 @@ Route::get('/user/edit', [App\Http\Controllers\User\UserController::class, 'user
 Route::patch('/user/{user}/update', [App\Http\Controllers\User\UserController::class, 'userUpdate'])->name('user.update');
 
 //Band
-Route::get('/band/{band}/edit', [App\Http\Controllers\User\BandController::class, 'bandEdit'])->name('band.edit');
 Route::resource('band', 'App\Http\Controllers\Band\BandController');
