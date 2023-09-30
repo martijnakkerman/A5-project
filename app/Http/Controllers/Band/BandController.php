@@ -30,7 +30,18 @@ class BandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required|string',
+            'description'=>'required|string',
+            'biography'=>'required|string',
+            'image_path'=>'required',
+            'text_color'=>'nullable|string',
+            'background_color'=>'nullable|string',
+        ]);
+        $band = new Band();
+        $band->create($request->all());
+        return redirect('/band/edit')
+            ->with('success', 'Band information updated');
     }
 
     /**
@@ -52,9 +63,20 @@ class BandController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Band $band)
     {
-        //
+        $request->validate([
+            'name'=>'required|string',
+            'description'=>'required|string',
+            'Biography'=>'required|string',
+            'image_path'=>'required',
+            'text_color'=>'nullable|string',
+            'background_color'=>'nullable|string',
+        ]);
+        $band->update($request->all());
+        return redirect('/band/edit')
+            ->with('success', 'Band information updated');
+
     }
 
     /**
