@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Edit user information') }}</div>
+                    <div class="card-header h4">{{ __('Edit user information') }}</div>
 
                     <div class="card-body">
                         @if (session('success'))
@@ -38,8 +38,8 @@
                                 <label for="email">e-mail:</label>
                                 <input type="text" class="form-control" name="email"
                                        value="{{ $user->email }}" />
-                            </div>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            </div> <br>
+                            <button type="submit" class="btn btn-success float-end">Save</button>
                             <a class="btn btn-primary" href="{{route('dashboard')}}">Back</a>
                         </form>
                     </div>
