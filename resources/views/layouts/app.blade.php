@@ -79,6 +79,21 @@
             @yield('content')
         </main>
     </div>
-</body>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#js-add-url").click(function () {
+                var newField = '<div class="form-group"><textarea rows="1" type="text" class="form-control" name="youtube_url[]"></textarea><a href="#" class="js-remove-embed-youtube">Remove</a></div>';
+                $(".js-embed-youtube-fields").append(newField);
+                return false;
+            });
 
+            $(".js-embed-youtube-fields").on("click", ".js-remove-embed-youtube", function () {
+                $(this).closest(".js-embed-youtube-field").remove();
+                return false;
+            });
+        });
+    </script>
+</body>
 </html>
