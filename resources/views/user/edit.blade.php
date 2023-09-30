@@ -40,7 +40,7 @@
                                        value="{{ $user->email }}" />
                             </div>
                             <button type="submit" class="btn btn-primary">Save</button>
-                            <a class="btn btn-primary" href="{{route('home')}}">Back</a>
+                            <a class="btn btn-primary" href="{{route('dashboard')}}">Back</a>
                         </form>
                     </div>
                 </div>
