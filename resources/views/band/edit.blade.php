@@ -29,11 +29,11 @@
                         @endif
 
                         @if (is_null($band->id))
-                                <form action="{{ route('band.store', $band->id) }}" method="POST">
+                                <form enctype="multipart/form-data" action="{{ route('band.store', $band->id) }}" method="POST">
 
                         @else
 
-                            <form action="{{ route('band.update', $band->id) }}" method="POST">
+                            <form enctype="multipart/form-data" action="{{ route('band.update', $band->id) }}" method="POST">
                             @method('PATCH')
                         @endif
                             @csrf
@@ -56,8 +56,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="image_path">Upload image:</label>
-                                <input type="file" class="form-control" name="image_path"
+                                <label for="image">Upload image:</label>
+                                <input type="file" class="form-control" name="image" accept="image/x-png,image/jpeg"
                                        value="{{ $band->image_path }}" />
                             </div>
 
