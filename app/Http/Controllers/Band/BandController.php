@@ -61,9 +61,9 @@ class BandController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Band $band)
     {
-        //
+        return view("band.edit",compact("band"));
     }
 
     /**
@@ -89,8 +89,12 @@ class BandController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Band $band)
     {
-        //
+        $bandname = $band->name;
+        $band->users()->detach();
+        $band->delete();
+        return redirect("/dashboard")
+            ->with('success', 'Your band: '.$bandname.' has been deleted');
     }
 }
