@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('User Information') }}</div>
+                <div class="card-header h4">{{ __('User Information') }}</div>
 
                 <div class="card-body">
                         <p>Username: {{ Auth::user()->name }}</p>
@@ -18,7 +18,7 @@
             <br>
 
             <div class="card">
-                <div class="card-header">{{ __('Your Bands') }}</div>
+                <div class="card-header h4">{{ __('Your Bands') }}</div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
@@ -41,20 +41,8 @@
                                      @endforeach
                                 </tbody>
                             </table>
-
-
-
-
-
                 </div>
             </div>
-
-
-
-
-
-
-
         </div>
     </div>
 </div>
