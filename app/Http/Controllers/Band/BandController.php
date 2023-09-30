@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Band;
 use App\Models\Band;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 class BandController extends Controller
 {
     /**
@@ -34,13 +36,17 @@ class BandController extends Controller
             'name'=>'required|string',
             'description'=>'required|string',
             'biography'=>'required|string',
-            'image_path'=>'required',
+            'image'=>'required|image|mimes:jpg,png',
             'text_color'=>'nullable|string',
             'background_color'=>'nullable|string',
         ]);
-        $band = new Band();
-        $band->create($request->all());
-        return redirect('/band/edit')
+
+        $uploadedfile = Storage::disk('public')->put("images", $request->image);
+        $request_all = $request->all();
+        $request_all['image_path'] = "images/".basename($uploadedfile);
+        $band = Band::create($request_all);
+        $band->users()->sync([(Auth::user()->id)]);
+        return redirect('/dashboard')
             ->with('success', 'Band information updated');
     }
 
@@ -73,6 +79,7 @@ class BandController extends Controller
             'text_color'=>'nullable|string',
             'background_color'=>'nullable|string',
         ]);
+
         $band->update($request->all());
         return redirect('/band/edit')
             ->with('success', 'Band information updated');
