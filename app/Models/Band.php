@@ -24,4 +24,9 @@ class Band extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User', 'user_band');
+    }
 }
