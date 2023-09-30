@@ -8,7 +8,7 @@
                     @if (is_null($band->id))
                         <div class="card-header h4">{{ __('Create a new band') }}</div>
                     @else
-                        <div class="card-header">{{ __('Update your band'.$band->name) }}</div>
+                        <div class="card-header h4">{{ __('Editing band: '.$band->name) }}</div>
                     @endif
 
                     <div class="card-body">
@@ -29,7 +29,7 @@
                         @endif
 
                         @if (is_null($band->id))
-                                <form enctype="multipart/form-data" action="{{ route('band.store', $band->id) }}" method="POST">
+                            <form enctype="multipart/form-data" action="{{ route('band.store', $band->id) }}" method="POST">
 
                         @else
 
@@ -55,12 +55,6 @@
                                        value="{{ $band->biography }}"></textarea>
                             </div>
 
-                            <div class="form-group">
-                                <label for="image">Upload image:</label>
-                                <input type="file" class="form-control" name="image" accept="image/x-png,image/jpeg"
-                                       value="{{ $band->image_path }}" />
-                            </div>
-
                             <div class="form-group w-25">
                                 <label for="text_color">Text color:</label>
                                 <input type="color" class="form-control" name="text_color"
@@ -71,7 +65,16 @@
                                 <label for="background_color">Background color:</label>
                                 <input type="color" class="form-control" name="background_color"
                                        value="{{ $band->background_color }}" />
-                            </div> <br>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image">Upload image:</label>
+                                <input type="file" class="form-control" name="image" accept="image/x-png,image/jpeg"/> <br>
+                                @if (!is_null($band->id))
+                                    <image class="img-fluid img-thumbnail rounded mx-auto d-block w-50 h-50" alt="Responsive image"
+                                           src="{{asset("storage/".$band->image_path)}}"></image>
+                                @endif
+                            </div>
 
                             <button type="submit" class="btn btn-success float-end">Save</button>
                             <a class="btn btn-primary" href="{{route('dashboard')}}">Back</a>
