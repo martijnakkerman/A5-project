@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Band;
 
+use App\Models\Band;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 class BandController extends Controller
@@ -19,7 +20,8 @@ class BandController extends Controller
      */
     public function create()
     {
-        return view("band.edit");
+        $band = new Band();
+        return view("band.edit",compact("band"));
 
     }
 
