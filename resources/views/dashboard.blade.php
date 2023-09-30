@@ -20,6 +20,11 @@
             <div class="card">
                 <div class="card-header h4">{{ __('Your Bands') }}</div>
                 <div class="card-body">
+                    @if (session('success'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <div class="row">
                         <div class="col-sm-12">
                             <a href ="{{route('band.create')}}" class="btn btn-primary">Create new band</a>
@@ -28,7 +33,8 @@
                                 <tr>
                                     <td>Band</td>
                                     <td>Last changed</td>
-                                    <td></td>
+                                    <td id="edit"></td>
+                                    <td id="delete"></td>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -37,10 +43,19 @@
                                              <td>{{$band->name}}</td>
                                              <td>{{$band->updated_at}}</td>
                                              <td><a href="{{route('band.edit',$band->id)}}">manage</a></td>
+                                             <td>
+                                                 <form action="{{ route('band.destroy', $band->id) }}" method="post">
+                                                     @csrf
+                                                     @method('DELETE')
+                                                     <button type="submit"  class="btn" data-toggle="tooltip" title='Delete'>Delete</button>
+                                                 </form>
+                                             </td>
                                          </tr>
                                      @endforeach
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
