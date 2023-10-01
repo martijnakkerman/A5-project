@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Band;
 use App\Http\Requests\ValidateBandRequest;
 use App\Models\Embed;
 use App\Models\Band;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
