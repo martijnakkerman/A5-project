@@ -21,15 +21,22 @@ class ValidateBandRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'name'=>'required|string',
             'description'=>'required|string',
             'biography'=>'required|string',
-            'image'=>'required|image|mimes:jpg,png',
             'text_color'=>'nullable|string',
             'background_color'=>'nullable|string',
             'embed_url'=>'required|array',
             'embed_url.*'=>'required|string',
         ];
+
+        if(!is_null($this->route('band'))){
+            $rules['image'] = 'nullable|image|mimes:jpg,png';
+        } else {
+            $rules['image'] = 'required|image|mimes:jpg,png';
+        }
+
+        return $rules;
     }
 }
