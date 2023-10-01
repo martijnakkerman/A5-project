@@ -6,14 +6,16 @@ use App\Http\Requests\ValidateBandRequest;
 use App\Models\Embed;
 use App\Models\Band;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 class BandController extends Controller
 {
     public function create()
     {
+        $users = User::all();
         $band = new Band();
-        return view("band.edit",compact("band"));
+        return view("band.edit",compact("band","users"));
 
     }
 
@@ -26,7 +28,7 @@ class BandController extends Controller
         $request_all = $request->all();
         $request_all['image_path'] = "images/".basename($uploadedfile);
         $band = Band::create($request_all);
-        $band->users()->sync([(Auth::user()->id)]);
+        $band->users()->sync($request->users);
 
         foreach ($request->embed_url as $embed_url) {
             $embed = Embed::create(['embed_url' => $embed_url, 'band_id' => $band->id]);
@@ -38,7 +40,8 @@ class BandController extends Controller
 
     public function edit(Band $band)
     {
-        return view("band.edit",compact("band"));
+        $users = User::all();
+        return view("band.edit",compact("band","users"));
     }
 
     /**
@@ -52,7 +55,7 @@ class BandController extends Controller
             $request_all['image_path'] = "images/".basename($uploadedfile);
         }
         $band->update($request_all);
-        $band->users()->sync([(Auth::user()->id)]);
+        $band->users()->sync($request->users);
         $band->embeds()->delete();
 
         foreach ($request->embed_url as $embed_url) {

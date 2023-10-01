@@ -38,7 +38,18 @@
                         @endif
                             @csrf
                             <div class="form-group">
-                                <label for="name">Band name:</label>
+                                <label for="users">Add More Band Managers:</label>
+                                <select name="users[]" id="users" class="form-control" multiple>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}" {{ in_array($user->id, $band->users->pluck('id')->toArray()) || ($user->id == auth()->user()->id) ? 'selected' : '' }}>
+                                            {{ $user->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div> <br>
+
+                            <div class="form-group">
+                                <label for="name">Band Name:</label>
                                 <input type="text" class="form-control" name="name"
                                        value="{{ $band->name }}" />
                             </div> <br>
@@ -75,19 +86,19 @@
                             </div> <br>
 
                             <div class="form-group w-25">
-                                <label for="text_color">Text color:</label>
+                                <label for="text_color">Text Color:</label>
                                 <input type="color" class="form-control" name="text_color"
                                        value="{{ $band->text_color }}" />
                             </div>
 
                             <div class="form-group w-25">
-                                <label for="background_color">Background color:</label>
+                                <label for="background_color">Background Color:</label>
                                 <input type="color" class="form-control" name="background_color"
                                        value="{{ $band->background_color }}" />
                             </div> <br>
 
                             <div class="form-group">
-                                <label for="image">Upload image:</label>
+                                <label for="image">Upload Image:</label>
                                 <input type="file" class="form-control" name="image" accept="image/x-png,image/jpeg"/> <br>
                                 @if (!is_null($band->id))
                                     <image class="img-fluid img-thumbnail rounded mx-auto d-block w-50 h-50" alt="Responsive image"

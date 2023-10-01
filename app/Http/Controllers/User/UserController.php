@@ -26,8 +26,8 @@ class UserController extends Controller
             $request->validate([
                 'name'=>'required',
                 'email'=>'required|email',
-
             ]);
+
             $user->update($request->all());
             return redirect('/user/edit')
                 ->with('success', 'User information updated');
