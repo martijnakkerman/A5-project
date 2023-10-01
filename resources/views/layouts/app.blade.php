@@ -13,6 +13,8 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -90,7 +92,7 @@
                     return false; // Prevent adding more fields
                 }
 
-                var newField = '<div class="form-group js-embed-youtube-field"><textarea rows="1" type="text" class="form-control" name="youtube_url[]"></textarea><a href="#" class="js-remove-embed-youtube">Remove</a></div>';
+                var newField = '<div class="form-group js-embed-youtube-field"><textarea rows="1" type="text" class="form-control" name="embed_url[]"></textarea><a href="#" class="js-remove-embed-youtube">Remove</a></div>';
                 $(".js-embed-youtube-fields").append(newField);
                 return false;
             });

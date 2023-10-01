@@ -61,14 +61,14 @@
                                 @if($band->embeds->count() > 0)
                                     @foreach($band->embeds as $embed)
                                         <div class="form-group js-embed-youtube-field">
-                                         <textarea rows="1" type="text" class="form-control js-embed-youtube-field" name="youtube_url[]"
-                                                   value="{{ $embed->youtube_url }}"></textarea>
+                                         <textarea rows="1" type="text" class="form-control js-embed-youtube-field" name="embed_url[]"
+                                                   value="{{ $embed->embed_url }}"></textarea>
                                             <a href="#" class="js-remove-embed-youtube">Remove</a>
                                         </div>
                                     @endforeach
                                 @else
                                     <div class="form-group js-embed-youtube-field">
-                                        <textarea rows="1" type="text" class="form-control js-embed-youtube-field" name="youtube_url[]"></textarea>
+                                        <textarea rows="1" type="text" class="form-control js-embed-youtube-field" name="embed_url[]"></textarea>
                                         <a href="#" class="js-remove-embed-youtube">Remove</a>
                                     </div>
                                 @endif

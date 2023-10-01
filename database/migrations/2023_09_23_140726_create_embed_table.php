@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('band_id');
             $table->foreign('band_id')->references('id')->on('band');
-            $table->string('youtube_url');
+            $table->text('embed_url');
         });
     }
 

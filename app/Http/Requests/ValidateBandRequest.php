@@ -28,6 +28,8 @@ class ValidateBandRequest extends FormRequest
             'image'=>'required|image|mimes:jpg,png',
             'text_color'=>'nullable|string',
             'background_color'=>'nullable|string',
+            'embed_url'=>'required|array',
+            'embed_url.*'=>'required|string',
         ];
     }
 }

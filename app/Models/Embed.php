@@ -11,7 +11,7 @@ class Embed extends Model
     protected $table = 'embed';
 
     protected $fillable = [
-        'youtube_url',
+        'embed_url',
         'band_id',
     ];
 

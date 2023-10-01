@@ -40,8 +40,8 @@ class BandController extends Controller
         $band = Band::create($request_all);
         $band->users()->sync([(Auth::user()->id)]);
 
-        foreach ($request->youtube_url as $youtube_url) {
-            $embed = Embed::create(['youtube_url' => $youtube_url, 'band_id' => $band->id]);
+        foreach ($request->embed_url as $embed_url) {
+            $embed = Embed::create(['embed_url' => $embed_url, 'band_id' => $band->id]);
         $band->embeds()->save($embed);
     }
         return redirect('/dashboard')
@@ -78,8 +78,8 @@ class BandController extends Controller
         $band->users()->sync([(Auth::user()->id)]);
         $band->embeds()->delete();
 
-        foreach ($request->youtube_url as $youtube_url) {
-            $embed = Embed::create(['youtube_url' => $youtube_url, 'band_id' => $band->id]);
+        foreach ($request->embed_url as $embed_url) {
+            $embed = Embed::create(['embed_url' => $embed_url, 'band_id' => $band->id]);
             $band->embeds()->save($embed);
         }
 

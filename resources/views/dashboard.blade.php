@@ -33,8 +33,7 @@
                                 <tr>
                                     <td>Band</td>
                                     <td>Last changed</td>
-                                    <td id="edit"></td>
-                                    <td id="delete"></td>
+                                    <td id="edit_delete"></td>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -42,13 +41,16 @@
                                          <tr>
                                              <td>{{$band->name}}</td>
                                              <td>{{$band->updated_at}}</td>
-                                             <td><a href="{{route('band.edit',$band->id)}}">manage</a></td>
+
                                              <td>
-                                                 <form action="{{ route('band.destroy', $band->id) }}" method="post">
-                                                     @csrf
-                                                     @method('DELETE')
-                                                     <button type="submit"  class="btn" data-toggle="tooltip" title='Delete'>Delete</button>
-                                                 </form>
+                                                 <div class="d-flex">
+                                                     <a class="btn btn-primary bi-pencil" href="{{route('band.edit',$band->id)}}"></a>
+                                                     <form action="{{ route('band.destroy', $band->id) }}" method="post">
+                                                         @csrf
+                                                         @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger bi-trash ms-1" data-toggle="tooltip" title='Delete'></button>
+                                                     </form>
+                                                 </div>
                                              </td>
                                          </tr>
                                      @endforeach
