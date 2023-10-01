@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 //Home
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/band-details/{band}', [App\Http\Controllers\Band\BandDetailsController::class, 'index'])->name('band.details');
+
 
 Route::middleware(['auth'])->group(function () {
     //Dashboard
