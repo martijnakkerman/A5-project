@@ -84,7 +84,13 @@
     <script>
         $(document).ready(function () {
             $("#js-add-url").click(function () {
-                var newField = '<div class="form-group"><textarea rows="1" type="text" class="form-control" name="youtube_url[]"></textarea><a href="#" class="js-remove-embed-youtube">Remove</a></div>';
+                // Check if the maximum limit (4) is reached
+                if ($(".js-embed-youtube-fields .form-group").length >= 4) {
+                    alert('You can add a maximum of 4 YouTube URLs.');
+                    return false; // Prevent adding more fields
+                }
+
+                var newField = '<div class="form-group js-embed-youtube-field"><textarea rows="1" type="text" class="form-control" name="youtube_url[]"></textarea><a href="#" class="js-remove-embed-youtube">Remove</a></div>';
                 $(".js-embed-youtube-fields").append(newField);
                 return false;
             });
