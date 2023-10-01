@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Band;
 
+use App\Models\Embed;
 use App\Models\Band;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -46,6 +47,11 @@ class BandController extends Controller
         $request_all['image_path'] = "images/".basename($uploadedfile);
         $band = Band::create($request_all);
         $band->users()->sync([(Auth::user()->id)]);
+
+        foreach ($request->youtube_url as $youtube_url) {
+            $embed = Embed::create(['youtube_url' => $youtube_url, 'band_id' => $band->id]);
+        $band->embeds()->save($embed);
+    }
         return redirect('/dashboard')
             ->with('success', 'Band information updated');
     }
@@ -74,17 +80,28 @@ class BandController extends Controller
         $request->validate([
             'name'=>'required|string',
             'description'=>'required|string',
-            'Biography'=>'required|string',
-            'image_path'=>'required',
+            'biography'=>'required|string',
+            'image'=>'nullable|image|mimes:jpg,png',
             'text_color'=>'nullable|string',
             'background_color'=>'nullable|string',
         ]);
-
+        $request_all = $request->all();
+        if(!is_null($request->image)) {
+            $uploadedfile = Storage::disk('public')->put("images", $request->image);
+            $request_all['image_path'] = "images/".basename($uploadedfile);
+        }
+        $band->update($request_all);
+        $band->users()->sync([(Auth::user()->id)]);
+        $band->embeds()->delete();
+        foreach ($request->youtube_url as $youtube_url) {
+            $embed = Embed::create(['youtube_url' => $youtube_url, 'band_id' => $band->id]);
+            $band->embeds()->save($embed);
+        }
         $band->update($request->all());
-        return redirect('/band/edit')
+        return redirect('/dashboard')
             ->with('success', 'Band information updated');
-
     }
+
 
     /**
      * Remove the specified resource from storage.
