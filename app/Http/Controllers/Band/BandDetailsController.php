@@ -9,8 +9,5 @@ class BandDetailsController extends Controller {
 
         return view("band.band-details",compact("band"));
 
-
-
-
     }
 }
