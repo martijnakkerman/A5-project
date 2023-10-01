@@ -56,25 +56,23 @@
                             </div> <br>
 
                             <div class="js-embed-youtube-fields">
+                                <label for="embed">Embedded Videos: (max 4)</label>
+                                <a href="#" class="btn btn-primary ms-3 mb-2" id="js-add-url">Add embed</a>
                                 @if($band->embeds->count() > 0)
                                     @foreach($band->embeds as $embed)
-                                        <div class="form-group">
-                                            <label for="embed">Youtube URLs:</label>
-                                            <textarea rows="1" type="text" class="form-control" name="youtube_url[]"
-                                                      value="{{ $embed->youtube_url }}"></textarea>
+                                        <div class="form-group js-embed-youtube-field">
+                                         <textarea rows="1" type="text" class="form-control js-embed-youtube-field" name="youtube_url[]"
+                                                   value="{{ $embed->youtube_url }}"></textarea>
                                             <a href="#" class="js-remove-embed-youtube">Remove</a>
                                         </div>
                                     @endforeach
                                 @else
-                                    <div class="form-group">
-                                        <label for="embed">Youtube URLs:</label>
-                                        <textarea rows="1" type="text" class="form-control" name="youtube_url[]"></textarea>
-                                        <a href="#" class="js-remove-embed-youtube btn btn-primary">Remove</a>
+                                    <div class="form-group js-embed-youtube-field">
+                                        <textarea rows="1" type="text" class="form-control js-embed-youtube-field" name="youtube_url[]"></textarea>
+                                        <a href="#" class="js-remove-embed-youtube">Remove</a>
                                     </div>
                                 @endif
-                                <a href="#" class="btn btn-primary" id="js-add-url">Add</a>
-                            </div>
-                            <br><br>
+                            </div> <br>
 
                             <div class="form-group w-25">
                                 <label for="text_color">Text color:</label>
