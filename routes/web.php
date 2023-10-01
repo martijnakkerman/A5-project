@@ -18,12 +18,16 @@ Auth::routes();
 //Home
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Dashboard
-Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    //Dashboard
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
-//User
-Route::get('/user/edit', [App\Http\Controllers\User\UserController::class, 'userEdit'])->name('user.edit');
-Route::patch('/user/{user}/update', [App\Http\Controllers\User\UserController::class, 'userUpdate'])->name('user.update');
+    //User
+    Route::get('/user/edit', [App\Http\Controllers\User\UserController::class, 'userEdit'])->name('user.edit');
+    Route::patch('/user/{user}/update', [App\Http\Controllers\User\UserController::class, 'userUpdate'])->name('user.update');
 
-//Band
-Route::resource('band', 'App\Http\Controllers\Band\BandController');
+    Route::middleware(['manager.check'])->group(function () {
+        //Band
+        Route::resource('band', 'App\Http\Controllers\Band\BandController');
+    });
+});
