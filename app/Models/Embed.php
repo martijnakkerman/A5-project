@@ -12,6 +12,7 @@ class Embed extends Model
 
     protected $fillable = [
         'youtube_url',
+        'band_id',
     ];
 
     protected $casts = [
