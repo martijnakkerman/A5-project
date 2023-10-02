@@ -7,7 +7,7 @@ use App\Models\Band;
 
 class HomeControllerTest extends TestCase
 {
-    use RefreshDatabase;
+//    use RefreshDatabase;
 
     public function testIndexReturnsView()
     {

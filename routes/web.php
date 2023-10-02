@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
     //User
     Route::get('/user/edit', [App\Http\Controllers\User\UserController::class, 'userEdit'])->name('user.edit');
     Route::patch('/user/{user}/update', [App\Http\Controllers\User\UserController::class, 'userUpdate'])->name('user.update');
+    Route::get('/user/password-reset', [App\Http\Controllers\Auth\ResetPasswordController::class, 'passwordReset'])->name('user.password-reset');
 
     Route::middleware(['manager.check'])->group(function () {
         //Band

@@ -11,7 +11,7 @@
                         <p>Username: {{ Auth::user()->name }}</p>
                         <p>E-mail: {{ Auth::user()->email }}</p>
                         <a class="btn btn-primary" href="{{ route('user.edit')}}">Edit user information</a> <br><br>
-                        <button class="btn btn-primary">Reset Password</button>
+                        <a class="btn btn-primary" href="{{ route('user.password-reset')}}">Change password</a>
                 </div>
             </div>
 
