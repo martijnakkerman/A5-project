@@ -51,12 +51,18 @@ class BandController extends Controller
     {
         $request_all = $request->all();
         if(!is_null($request->image)) {
+            if (Storage::disk('public')->exists($band->image_path)) {
+                Storage::disk('public')->delete($band->image_path);
+            }
+
             $uploadedfile = Storage::disk('public')->put("images", $request->image);
             $request_all['image_path'] = "images/".basename($uploadedfile);
         }
         $band->update($request_all);
         $band->users()->sync($request->users);
         $band->embeds()->delete();
+
+
 
         foreach ($request->embed_url as $embed_url) {
             $embed = Embed::create(['embed_url' => $embed_url, 'band_id' => $band->id]);
