@@ -7,8 +7,7 @@ use App\Models\Band;
 
 class HomeControllerTest extends TestCase
 {
-//    use RefreshDatabase;
-
+    use RefreshDatabase;
     public function testIndexReturnsView()
     {
         $response = $this->get('/');
@@ -41,7 +40,7 @@ class HomeControllerTest extends TestCase
 
         $response->assertStatus(200)
             ->assertViewIs('home')
-            ->assertSee('List of Bands'); // Assuming this text appears in your view
+            ->assertSee('Band Harbor'); // Assuming this text appears in your view
     }
 }
 

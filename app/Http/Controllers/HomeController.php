@@ -13,7 +13,7 @@ class HomeController extends Controller
         // Perform a database query to search for bands by title or description
         $bands = Band::where('name', 'like', "%$search%")
             ->orWhere('description', 'like', "%$search%")
-            ->orderBy("created_at","desc")->paginate(9);
+            ->orderBy("created_at","desc")->get();
 
         return view('home', compact('bands'));
     }
