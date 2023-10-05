@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use mysql_xdevapi\Exception;
+
 class BandController extends Controller
 {
     public function create()
@@ -19,9 +21,6 @@ class BandController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(ValidateBandRequest $request)
     {
         $uploadedfile = Storage::disk('public')->put("images", $request->image);
@@ -35,7 +34,7 @@ class BandController extends Controller
         $band->embeds()->save($embed);
     }
         return redirect('/dashboard')
-            ->with('success', 'Band: '.$band->name.' was succesfully created.');
+            ->with('success', 'Band: '.$band->name.' was successfully created.');
     }
 
     public function edit(Band $band)
@@ -49,27 +48,30 @@ class BandController extends Controller
      */
     public function update(ValidateBandRequest $request, Band $band)
     {
-        $request_all = $request->all();
-        if(!is_null($request->image)) {
-            if (Storage::disk('public')->exists($band->image_path)) {
-                Storage::disk('public')->delete($band->image_path);
+        \Log::info("started update");
+        try {
+            $request_all = $request->all();
+            if (!is_null($request->image)) {
+                if (Storage::disk('public')->exists($band->image_path)) {
+                    Storage::disk('public')->delete($band->image_path);
+                }
+
+                $uploadedfile = Storage::disk('public')->put("images", $request->image);
+                $request_all['image_path'] = "images/" . basename($uploadedfile);
             }
 
-            $uploadedfile = Storage::disk('public')->put("images", $request->image);
-            $request_all['image_path'] = "images/".basename($uploadedfile);
-        }
-        $band->update($request_all);
-        $band->users()->sync($request->users);
-        $band->embeds()->delete();
+            $band->update($request_all);
+            $band->users()->sync($request->users);
+            $band->embeds()->delete();
 
-
-
-        foreach ($request->embed_url as $embed_url) {
-            $embed = Embed::create(['embed_url' => $embed_url, 'band_id' => $band->id]);
-            $band->embeds()->save($embed);
+            foreach ($request->embed_url as $embed_url) {
+                $embed = Embed::create(['embed_url' => $embed_url, 'band_id' => $band->id]);
+                $band->embeds()->save($embed);
+            }
+        } catch(\Exception $e) {
+            \Log::error($e);
         }
 
-        $band->update($request->all());
         return redirect('/dashboard')
             ->with('success', 'Band information updated.');
     }
@@ -85,13 +87,12 @@ class BandController extends Controller
         if (Storage::disk('public')->exists($band->image_path)) {
 
             Storage::disk('public')->delete($band->image_path);
-        } else {
-            dd("file not found");
         }
 
         $band->users()->detach();
         $band->embeds()->delete();
         $band->delete();
+
         return redirect("/dashboard")
             ->with('success', 'Your band: '.$bandname.' has been deleted.');
     }

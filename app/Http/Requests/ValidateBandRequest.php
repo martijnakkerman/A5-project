@@ -25,12 +25,12 @@ class ValidateBandRequest extends FormRequest
             'name'=>'required|string',
             'description'=>'required|string',
             'biography'=>'required|string',
-            'text_color'=>'nullable|string',
-            'background_color'=>'nullable|string',
+            'text_color'=>'required|string',
+            'background_color'=>'required|string',
             'embed_url'=>'required|array',
             'embed_url.*'=>'required|string',
             'users'=>'required|array',
-            'users.*'=>'required|string',
+            'users.*'=>'required',
         ];
 
         if(!is_null($this->route('band'))){

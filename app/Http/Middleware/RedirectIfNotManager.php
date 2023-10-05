@@ -20,7 +20,6 @@ class RedirectIfNotManager
         $user = Auth::user();
         $band = $request->route('band');
             if (!is_null($band) && !$user->bands->contains($band->id)) {
-
                 return redirect(RouteServiceProvider::HOME);
             }
 
