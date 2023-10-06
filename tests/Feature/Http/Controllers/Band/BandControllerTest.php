@@ -66,10 +66,11 @@ class BandControllerTest extends TestCase
     {
         Storage::fake('public');
 
-        $response = $this->testStoreBand();
-        $user = $response['user'];
-        $band = $response['band'];
-        $users = $response['users'];
+        $user = User::factory()->create();
+        $band = Band::factory()->create();
+        $user->bands()->attach($band);
+        $users = User::factory(3)->create();
+        $users[] = $user;
 
         // Create a temporary file for testing
         $uploadedFile = UploadedFile::fake()->create('test_image.jpg', 200);
@@ -115,6 +116,7 @@ class BandControllerTest extends TestCase
 
         $user = User::factory()->create();
         $band = Band::factory()->create();
+        $user->bands()->attach($band);
 
         $response = $this->actingAs($user)->delete(route('band.destroy',$band->id));
 
